@@ -24,6 +24,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdint.h>
+#include "API_delay.h"
+#include "API_debounce.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,7 +52,9 @@ typedef enum tagTimes {
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+delay_t blinkDelay;
+uint32_t tiempos[] = {500, 100};
+uint8_t indiceTiempo = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,12 +98,31 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  debounceFSM_init();
+  delayInit(&blinkDelay, tiempos[indiceTiempo]);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  // 1. Actualizar la máquina de estados del botón constantemente
+	        debounceFSM_update();
+
+	        // 2. Revisar si la FSM detectó que se presionó el botón
+	        if (readKey()) {
+	            indiceTiempo++;
+	            if (indiceTiempo >= 2) {
+	                indiceTiempo = 0; // Reiniciamos el índice si se pasa de las opciones
+	            }
+	            // Cambiamos el tiempo de parpadeo según el arreglo
+	            delayWrite(&blinkDelay, tiempos[indiceTiempo]);
+	        }
+
+	        // 3. Revisar si ya pasó el tiempo para cambiar el estado del LED
+	        if (delayRead(&blinkDelay)) {
+	            HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+	        }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -165,6 +188,7 @@ void Error_Handler(void)
   __disable_irq();
   while (1)
   {
+
   }
   /* USER CODE END Error_Handler_Debug */
 }
