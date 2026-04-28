@@ -1,0 +1,2 @@
+../Drivers/LCD_I2C/Src/LCD_port.c:18:8:LCD_Port_I2C_Transmit	2
+../Drivers/LCD_I2C/Src/LCD_port.c:31:6:LCD_Port_Delay	1

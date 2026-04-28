@@ -1,0 +1,3 @@
+../Drivers/UART_LOG/Src/API_UART.c:16:6:API_UART_Init	8	static
+../Drivers/UART_LOG/Src/API_UART.c:28:6:API_UART_SendString	16	static
+../Drivers/UART_LOG/Src/API_UART.c:43:6:API_UART_LogStability	104	static

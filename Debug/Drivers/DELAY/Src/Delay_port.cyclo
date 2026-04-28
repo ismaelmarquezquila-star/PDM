@@ -1,0 +1,2 @@
+../Drivers/DELAY/Src/Delay_port.c:4:6:Delay_Port_Init	1
+../Drivers/DELAY/Src/Delay_port.c:8:10:Delay_Port_GetTick	1

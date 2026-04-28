@@ -1,0 +1,10 @@
+../Drivers/SD_STORAGE/Src/SD_port.c:7:13:CS_Select	8	static
+../Drivers/SD_STORAGE/Src/SD_port.c:11:13:CS_Deselect	8	static
+../Drivers/SD_STORAGE/Src/SD_port.c:15:16:SPI_TransmitReceive	32	static
+../Drivers/SD_STORAGE/Src/SD_port.c:24:16:SD_SendCmd	24	static
+../Drivers/SD_STORAGE/Src/SD_port.c:51:12:SD_ReadSector	32	static
+../Drivers/SD_STORAGE/Src/SD_port.c:83:9:SD_disk_initialize	24	static
+../Drivers/SD_STORAGE/Src/SD_port.c:137:9:SD_disk_status	16	static
+../Drivers/SD_STORAGE/Src/SD_port.c:141:9:SD_disk_read	24	static
+../Drivers/SD_STORAGE/Src/SD_port.c:152:9:SD_disk_write	32	static
+../Drivers/SD_STORAGE/Src/SD_port.c:175:9:SD_disk_ioctl	16	static

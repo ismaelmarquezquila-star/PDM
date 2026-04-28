@@ -1,0 +1,4 @@
+../Drivers/SD_STORAGE/Src/API_Storage.c:25:8:API_Storage_Init	16	static
+../Drivers/SD_STORAGE/Src/API_Storage.c:43:8:API_Storage_OpenFile	16	static
+../Drivers/SD_STORAGE/Src/API_Storage.c:53:8:API_Storage_LogData	104	static
+../Drivers/SD_STORAGE/Src/API_Storage.c:64:8:API_Storage_CloseFile	8	static

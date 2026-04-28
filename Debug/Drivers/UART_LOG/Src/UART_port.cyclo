@@ -1,0 +1,2 @@
+../Drivers/UART_LOG/Src/UART_port.c:5:8:UART_Port_Init	1
+../Drivers/UART_LOG/Src/UART_port.c:9:8:UART_Port_Transmit	4
