@@ -1,25 +1,34 @@
-Nombre completo del alumno: Ismael Farid Marquez Quila
+# DataLogger de Estabilidad para Embarcaciones - Proyecto Integrador CESE (UBA)
 
-Asignatura: Programación de microprocesadores
+**Autor:** Ismael Farid Marquez Quila  
+**Asignaturas:** Programación de Microcontroladores (PdM) y Protocolos de Comunicación en Sistemas Embebidos (PCSE).  
+**Plataforma:** STM32F446RE (Nucleo-F446RE)
 
-Trabajo práctico: Practica 0
-Nombre completo del alumno: Ismael Farid Marquez Quila
-Asignatura: Programación de microprocesadores
-Trabajo práctico: Práctica 2
+## 1. Descripción de la Idea
+Este proyecto consiste en un **DataLogger de precisión** diseñado para monitorear la estabilidad inercial en canoas o lanchas de fibra de vidrio. El sistema mide los ángulos de inclinación (**Pitch y Roll**) en tiempo real para prevenir riesgos de navegación y permitir un análisis posterior de la dinámica de la embarcación.
 
-#Configuración de Hardware (Proyecto Original)
+## 2. Funcionalidades Principales
+- **Adquisición Inercial:** Lectura de acelerometría mediante sensor MPU6050 vía I2C.
+- **Cálculo de Estabilidad:** Procesamiento trigonométrico (`atan2f`) para determinar ángulos de balanceo y cabeceo.
+- **Persistencia de Datos:** Almacenamiento en tarjeta microSD (formato CSV) mediante bus SPI y el middleware FatFS.
+- **Interfaz de Usuario:** - Visualización de datos y estados en pantalla LCD 16x2 (vía I2C).
+  - Control de inicio/parada de grabación mediante teclado matricial.
+- **Telemetría:** Envío de datos procesados por UART para monitoreo remoto.
 
-Este proyecto fue desarrollado, configurado y probado utilizando la siguiente arquitectura de hardware:
+## 3. Estructura del Proyecto (Arquitectura API/Port)
+Siguiendo los requerimientos de **PCSE**, el código está organizado bajo una estricta arquitectura de capas para garantizar la portabilidad:
 
-* Placa de Desarrollo: NUCLEO-F446RE
-* Microcontrolador: STM32F446RETx
-* Core:** ARM Cortex-M4
-* Oscilador / Reloj: HSI (Configuración por defecto del IDE)
-
-Periféricos y Mapeo de Pines Utilizados
-
-Para la evaluación y revisión de la lógica de este proyecto, tener en cuenta la siguiente asignación de pines físicos de la placa F446RE:
-
+```text
+TP_FINAL_DATA_LOGGER/
+├── Core/
+│   ├── App/             <-- Lógica de Aplicación (MEF Principal)
+│   ├── Src/Inc/         <-- Configuración HAL y main.c
+├── Drivers/
+│   ├── API/             <-- Capa Genérica (Lógica del Sensor y SD)
+│   │   ├── Src/Inc/     <-- API_MPU6050, API_Storage, API_UART
+│   └── Port/            <-- Capa de Abstracción de Hardware (Low Level)
+│       ├── Src/Inc/     <-- MPU6050_port, SD_port (Acceso a HAL)
+└── FATFS/               <-- Middleware para gestión de archivos en SD
 | Componente | Etiqueta HAL | Puerto / Pin físico |
 | :--- | :--- | :--- |
 | **LED Verde (User LED)** | `LD2_GPIO_Port` / `LD2_Pin` | **PA5** |
